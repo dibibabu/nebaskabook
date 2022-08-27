@@ -1,0 +1,50 @@
+<!-- Navbar -->
+</header>
+
+<div class="col-sm-4 col-xl-12">
+  
+  <div class="container-fluid mt-5">
+    <div class="container-fluid mt-5">
+      <div class="bg-secondary rounded h-100 p-4">
+        <h6 class="mb-4">Product Details</h6>
+        <div class="">
+          <a href="/admin/add-product" class="btn btn-success ml-auto">Add Product</a>
+        </div>
+        <table class="table mt-5">
+          <thead>
+            <tr>
+              <th scope="col">No:</th>
+              <th scope="col">Product name</th>
+              <th scope="col">Price</th>
+              <th scope="col">description</th>
+              <th scope="col">category</th>
+              <th scope="col">Image</th>
+            </tr>
+          </thead>
+          <tbody>
+              {{#each products}}
+            <tr>
+              <th scope="row">{{inc @index}}</th>
+              <td>{{this.name}}</td>
+              <td>{{this.price}}</td>
+              <td>{{this.description}}</td>
+              <td>{{this.category}}</td>
+              <td><img style="width:50px;height:50px;" src="/product-image/{{this.images.[0]}}"></td>
+             <td><a
+              class="btn btn-success"
+              href="/admin/edit-product?id={{this._id}}"
+            >Edit</a></td>
+             
+            
+              <td> <a  class="btn btn-danger" href="/admin/delete-product/?id={{this._id}}" onclick="return confirm('Are you sure to delete?')">Delete</a></td>
+              {{/each}}
+             
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+              

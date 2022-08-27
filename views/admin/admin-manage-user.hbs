@@ -1,0 +1,40 @@
+<!-- Navbar -->
+</header>
+<div class="col-sm-6 col-xl-12">
+    <div class="container-fluid mt-5">
+        <div class="container-fluid mt-5">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h6 class="mb-4">User Details</h6>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Password</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each userDtls}}
+                        <tr>
+                            <th scope="row">{{inc @index}}</th>
+                            <td>{{this.username}}</td>
+                            <td>{{this.email}}</td>
+                            <td>{{this.password}}</td>
+                            <td>{{#if blockUsers}}
+                                <a class="btn btn-danger" href="/admin/admin-manage-user/unblock-users/{{this._id}}"
+                                    onclick="return confirm('Are you sure to unblock{{this.name}}?')">unBlock</a>
+                                {{else}}
+                                <a class="btn btn-primary" href="/admin/admin-manage-user/block-users/{{this._id}}"
+                                    onclick="return confirm('Are you sure to block{{this.name}}?')">Block</a>
+                                {{/if}}
+                            </td>
+                        </tr>
+                        {{/each}}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

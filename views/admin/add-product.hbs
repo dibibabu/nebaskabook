@@ -1,0 +1,62 @@
+<div class="col-sm-6 col-xl-12">
+  <div class="container-fluid mt-5">
+    <div class="container-fluid mt-5">
+      <div class="bg-secondary rounded h-100 p-4">
+        <h6 class="mb-4">Product Details</h6>
+        <div class="container ">
+
+          <form action="/admin/add-product" method="POST" enctype="multipart/form-data">
+            <div class="mt-5 mb-3">
+              <label for="" class="form-label">product name</label>
+              <input type="text" class="form-control" name="name" id="exampleInputUsername">
+            </div>
+
+            <div class="mt-5 mb-3">
+              <label for="exampleInputCategory" class="form-label">price</label>
+              <input type="number" class="form-control" name="price" id="exampleInputUsername">
+            </div>
+
+            <div class="mt-5 mb-3">
+              <label for="" class="form-label">description</label>
+              <input type="text" class="form-control" name="description" id="exampleInputUsername">
+            </div>
+
+           <div class="mt-5 mb-3">
+                <label for="" class="form-label">category</label>
+                <select class="form-select" aria-label="Default select example" name="category" required>
+                     
+                     {{#each categories}}
+                     <option value="{{this.category}}">{{this.category}}</option>
+                     {{/each}}
+                </select>
+               
+            </div>
+
+           
+          <div class="mt-5 mb-3">
+        <label for="" class="form-label">image</label>
+        <img src="/product-image/{{product.images.[0]}}" style="width:100px ; height: 100px;" id="imgView">
+        <img src="/product-image/{{product.images.[1]}}" style="width:100px ; height: 100px;" id="imgView1">
+        <img src="/product-image/{{product.images.[2]}}" style="width:100px ; height: 100px;" id="imgView2">
+        <img src="/product-image/{{product.images.[3]}}" style="width:100px ; height: 100px;" id="imgView3">
+        <input style="margin-top:20px ;" type="file" class="form-control" name="image" id="exampleInputUsername" value="{{product._id}}"  multiple  onchange="viewImage(event)">
+      </div>
+
+
+            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+function viewImage(event){
+  document.getElementById('imgView').src=URL.createObjectURL(event.target.files[0]),
+   document.getElementById('imgView1').src=URL.createObjectURL(event.target.files[1]),
+    document.getElementById('imgView2').src=URL.createObjectURL(event.target.files[2]),
+     document.getElementById('imgView3').src=URL.createObjectURL(event.target.files[3])
+}
+
+</script>

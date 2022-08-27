@@ -1,0 +1,99 @@
+<div style="margin-top:15px ; margin-left:800px ">
+                
+
+
+                <!-- Modal -->
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                  Shipping Details
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                {{!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> --}}
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body container">
+                                {{#each orderBill}}
+
+                                <dt>Shipping Details</dt>
+                                <div class="col-md-3" style="border:solid hsl(353, 89%, 4%); }">
+                                    <dl class="text-left">
+                                        <dd>Name:{{this.deliveryDetails.name}}</dd>
+                                        <dd>Mobile:{{this.deliveryDetails.mobile}}</dd>
+                                        <dd>Address:{{this.deliveryDetails.address}}</dd>
+                                        <dd>Pincode:{{this.deliveryDetails.pincode}}</dd>
+
+                                        <dd>Payment Method:{{this.paymentMethod}}</dd>
+                                        <dd>Total Bill:₹{{this.totalAmount}}</dd>
+                                        <dd>Order Status:{{this.status}}</dd>
+                                        <dd>Order Date:{{this.date}}</dd>
+
+
+                                    </dl>
+                                </div>
+                            </div>
+                            {{/each}}
+
+                        </div>
+                        {{!-- <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          
+                        </div> --}}
+                    </div>
+                </div>
+        </div>
+
+<div class="row isotope-grid" style="margin-top:50px ; margin-left:50px ">
+    {{#each products}}
+    <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+        <!-- Block2 -->
+        <div class="block2">
+            <div class="block2-pic hov-img0 label-new" data-label="New">
+                <div class="block2-pic hov-img0">
+                    <img src="/product-image/{{this.product.images.[0]}}" alt="IMG-PRODUCT" style="height:20rem ;">
+                </div>
+
+               
+            </div>
+
+            <div class="block2-txt flex-w flex-t p-t-14">
+                <div class="block2-txt-child1 flex-col-l ">
+                    <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                        {{this.product.name}}
+                    </a>
+
+                    <span class="stext-105 cl3">
+                        ₹{{this.product.price}}
+                    </span>
+
+                    
+                    <h6 class="stext-105 cl3">
+                        <p>Quantity:{{this.quantity}}</p>
+                    </h6>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+    {{/each}}
+
+      <head>
+                <title>Bootstrap Example</title>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+            </head>
+
+    
+</div>

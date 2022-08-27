@@ -1,0 +1,807 @@
+{{#if cartCount}}
+
+    <div class="header-cart flex-col-l p-l-65 p-r-25">
+        <div class="header-cart-title flex-w flex-sb-m p-b-8">
+            <span class="mtext-103 cl2">
+                Your Cart
+            </span>
+
+            <div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
+                <i class="zmdi zmdi-close"></i>
+            </div>
+        </div>
+        {{#if user}}
+        {{#if cartItems}}
+        <div class="header-cart-content flex-w js-pscroll">
+            {{#each cartItems}}
+            <ul class="header-cart-wrapitem w-full">
+
+                <li class="header-cart-item flex-w flex-t m-b-12">
+                    <div class="header-cart-item-img">
+                        <img src="/productImages/{{this.product._id}}0.jpg" alt="IMG">
+                    </div>
+
+                    <div class="header-cart-item-txt p-t-8">
+                        <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+                            {{this.product.name}}
+                        </a>
+
+                        <span class="header-cart-item-info">
+                            ${{this.product.price}} x {{this.quantity}}
+                        </span>
+                    </div>
+                </li>
+
+
+            </ul>
+            {{/each}}
+            <div class="w-full">
+                <div class="header-cart-total w-full p-tb-40">
+                    Total: ${{totalAmount}}
+                </div>
+
+                <div class="header-cart-buttons flex-w w-full">
+                    <a href="/cart"
+                        class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+                        View Cart
+                    </a>
+
+                    <a href="/checkout"
+                        class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+                        Check Out
+                    </a>
+                </div>
+            </div>
+        </div>
+        {{else}}
+        <center>
+            <h3 style="color: red;">Sorry your cart is empty</h3>
+            <img src="https://alphapharmaexhibitions.com/images/cartempty1.png" alt="" style="width:250px"><br>
+            <a class="btn btn-succes" href="/shop" style="margin-top: 17px; color: green; border: solid green;">SHOP
+                NOW</a>
+        </center>
+        {{/if}}
+        {{else}}
+        <div class="container align-items-center">
+            <div>
+                <img src="https://i.pinimg.com/originals/68/90/6f/68906ff38a09a42fd26cafdec2247462.jpg" alt=""
+                    style="width: 250px; ;height: auto ;">
+            </div>
+            <div>
+                <P class="ml-5">Press login to continue</P>
+                <a href="/login"><button class="btn btn-success" style="margin-left:5em ;">LOGIN</button></a>
+
+            </div>
+        </div>
+
+        {{/if}}
+    </div>
+</div>
+
+<form id="checkout-form">
+    <section style="margin-top: 30px;padding-top: 50px">
+        <div class="container">
+            <input name="userId" value="{{user._id}}" hidden>
+
+                <div class="row">
+                <div class="col-12" style="margin-bottom: 10px ;">
+
+                    <div class="billing-address">
+
+                        <h5 class="checkout-box-title">SAVED ADDRESS</h5>
+
+                        <div class="row checkout-billing-adress-box">
+
+
+                            {{#each saveAddress.address}}
+                            <div class="col-md-3" style="border:solid hsl(0, 79%, 43%); background-color: #c6cfc5;}">
+                                <dl class="text-left">
+                                    <dt>{{this.First_Name}} {{this.Last_Name}}</dt>
+                                    <dd>"{{this.Company_Name}}"</dd>
+                                    <dd>{{this.Street_Address}},{{this.Extra_Details}}</dd>
+                                    <dd>{{this.Town_City}}, {{this.Country_State}}</dd>
+                                    <dd>PIN:{{this.Post_Code}}</dd>
+                                    <dd>Ph:{{this.Phone}}</dd>
+                                    <dd>Alt-Ph:{{this.Alt_Phone}}</dd>
+                                    <dt class="mt-1 mb-1 d-flex">
+                                        <input type="radio" name="choice"
+                                            onclick="savedAddressSelect('{{this.First_Name}}','{{this.Last_Name}}','{{this.Company_Name}}','{{this.Street_Address}}','{{this.Extra_Details}}','{{this.Town_City}}','{{this.Country_State}}','{{this.Post_Code}}','{{this.Phone}}','{{this.Alt_Phone}}')"
+                                            id="useAddress"><span style="color: #007eff; margin-left: 3px;">Use
+                                            Address</span>
+                                    </dt><br>
+
+                                </dl>
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-sm-12 col-xs-12">
+                    <div class="billing-address">
+                        <h5 class="checkout-box-title">ADDRESS</h5>
+                        <div class="checkout-billing-adress-box">
+
+                            <div class="billing-address-input clearfix">
+                                <label>FIRST NAME *</label>
+                                <input type="text" name="First_Name" id="First_Name">
+                            </div>
+                            <div class="billing-address-input clearfix">
+                                <label>LAST NAME *</label>
+                                <input type="text" name="Last_Name" id="Last_Name">
+                            </div>
+                            <div class="billing-address-input clearfix">
+                                <label>COMPANY / HOUSE NAME *</label>
+                                <input type="text" name="Company_Name" id="Company_Name">
+                            </div>
+                            <div class="billing-address-input clearfix">
+                                <label>ADDRESS *</label>
+                                <input type="text" placeholder="Street Address" name="Street_Address"
+                                    id="Street_Address">
+                                <input type="text" placeholder="Fashin, suite, unite ect (optinal)" name="Extra_Details"
+                                    id="Extra_Details">
+                            </div>
+                            <div class="billing-address-input clearfix">
+                                <label>TOWN / CITY *</label>
+                                <input type="text" name="Town_City" id="Town_City">
+                            </div>
+                            <div class="billing-address-input clearfix">
+                                <label>COUNTRY / STATES</label>
+                                <input type="text" name="Country_State" id="Country_State">
+                            </div>
+                            <div class="billing-address-input clearfix">
+                                <label>POSTCODE / ZIP *</label>
+                                <input type="text" name="Post_Code" id="Post_Code">
+                            </div>
+                            {{!-- <div class="billing-address-input clearfix">
+                                <label>EMAIL ADDRESS *</label>
+                                <input type="text">
+                            </div> --}}
+                            <div class="billing-address-input clearfix" style="margin-bottom:0px">
+                                <label>PHONE *</label>
+                                <input type="text" name="Phone" id="Phone" >
+                            </div>
+                            <div class="cbab-create-account">
+                                {{!-- <input onchange="useRegPnum1('{{ user.Pnum }}')" id="useRegPnum" type="checkbox">
+                                --}}
+                                <label>Use registered phone number</label>
+                            </div>
+                            <div class="billing-address-input clearfix">
+                                <label>ALTERNATE PHONE *</label>
+                                <input type="text" name="Alt_Phone" id="Alt_Phone">
+                            </div><br>
+                            <div class="cbab-create-account">
+                                <input name="saveAddress" type="checkbox">
+                                <label>Save address</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                   <div class="pcb-content">
+                       
+                        <div class="pcb-cuppon-input clearfix">
+                            <p>Copy the coupon to get {{coupon.[0].Offer}}% discount</p>
+                           
+
+                            <input type="text" value= {{coupon.[0].Name}} id="myInput">
+
+                            <a onclick="myFunction()" class="btn btn-info">Copy</a>
+                           
+
+                        </div>
+                    </div>
+                    <div class="promotional-code-box">
+                        <h5 class="checkout-box-title">COUPON CODE</h5>
+                        <div class="pcb-content">
+                            <p>Enter your coupon code if you have one</p>
+                            <div class="pcb-cuppon-input clearfix">
+
+                                <input type="text" placeholder="Coupon code" name="Coupon_Code" id="couponInput"
+                                    value="">
+                                <div>
+                                    <span id="couponValid"></span>
+                                </div>
+                                
+                                <a onclick="couponCheck()" class="btn btn-danger">Apply</a>
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                    <div class="your-order-box">
+                        <h5 class="checkout-box-title">YOUR ORDER</h5>
+                        <div class="yob-content">
+
+                            {{!-- <ul>
+                                <li class="clearfix">Cart Subtotal <span style="font-weight: bolder;font-size: 20px;">₹
+                                        {{ctotal}}</span></li>
+                                <li class="clearfix">Shipping and Handling <span>Free Shipping</span></li>
+                                <li class="order-total clearfix">Order Total <span>₹ {{ctotal}}</span></li>
+                            </ul> --}}
+
+                            <ul>
+                                <li class="clearfix">Cart Subtotal <span style="font-weight: bolder;font-size: 20px;">RS:
+                                     {{total}}</span></li>
+                                {{!-- <input name="totalfinalPrice" value="{{totalAmount}}" hidden> --}}
+                                <li class="clearfix">Discount<span>- RS:<span id="totaldiscount">0</span></span></li>
+                                <li class="clearfix">Shipping and Handling <span>Free Shipping</span></li>
+                                <li class="order-total clearfix">Order Total <span>RS:<span
+                                            id="totalPrice"> {{total}}</span></span></li>
+                                <input type="hidden" name="totalfinalPrice" id="totalfinalPrice"
+                                    value="{{total}}">
+                                {{!-- <input type="hidden" name="usdToInr" id="usdToInr"> --}}
+                            </ul>
+
+                        </div>
+                    </div>
+
+                  <div class="promotional-code-box"  style="background-color: lightgray;">
+                        <h5 class="checkout-box-title">PAYMENT METHOD</h5>
+                        <div class="pcb-content">
+                            <p>Select your payment method</p>
+                            <div class="pcb-cuppon-input clearfix">
+
+                                <label
+                                    style="margin-left: 25px;color: #000000;font-size: 14px;font-weight: 400;">COD</label>
+                                <input type="radio" value="COD" name="Payment-Method" id="PaymethodCod" style="margin-top: -26px;"
+                                    onclick="showPlaceOrderBtn()" required>
+                            </div>
+                            <div class="pcb-cuppon-input clearfix">
+
+                                <label
+                                    style="margin-left: 25px;color: #000000;font-size: 14px;font-weight: 400; margin-top: 10px;">Razorpay</label>
+                                <input type="radio" value="Razorpay" name="Payment-Method"  style="margin-top: -26px;"
+                                    onclick="showPlaceOrderBtn()">
+
+                            </div>
+                            <div class="create-account-checkout-method"  style="background-color: lightgray;">
+                                <div class="place-order" style="text-align: left;">
+                                    <button class="checkout-page-button hvr-bs" type="submit" id="submit-btn">Place
+                                        order</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </section>
+</form>
+
+{{!-- razorpay link --}}
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+{{!-- validation script --}}
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+
+<script>
+
+    //input field validation
+
+   
+
+        $.validator.addMethod("alpha", function (value, element) {
+            return this.optional(element) || value == value.match(/^[a-zA-Z\s]+$/);
+        });
+
+
+        $('#checkout-form').validate({
+
+            rules: {
+
+                First_Name: {
+                    required: true,
+                    alpha: true,
+                    minlength: 3,
+                },
+
+                Last_Name: {
+                    required: true,
+                    alpha: true
+                },
+
+                Company_Name: {
+                    required: true,
+                    minlength: 3
+                },
+
+                Street_Address: {
+                    required: true,
+                    minlength: 3
+                },
+
+                Extra_Details: {
+                    required: true,
+                    minlength: 3
+                },
+
+                Town_City: {
+                    required: true,
+                    alpha: true,
+                    minlength: 3
+                },
+
+                Country_State: {
+                    required: true,
+                    alpha: true,
+                    minlength: 3
+                },
+
+                Post_Code: {
+                    required: true,
+                    digits: true,
+                    minlength: 6,
+                    maxlength: 6
+                },
+
+                Phone: {
+                    required: true,
+                    digits: true,
+                    minlength: 10,
+                    maxlength: 10
+                },
+
+                Alt_Phone: {
+                    required: true,
+                    digits: true,
+                    minlength: 10,
+                    maxlength: 10
+                },
+                Pay_Method: {
+                    required: true
+                }
+
+
+            },
+
+            messages: {
+
+                First_Name: {
+                    alpha: "Name should be in alphabets"
+                },
+
+                Last_Name: {
+                    alpha: "Name should be in alphabets"
+                },
+                Town_City: {
+                    alpha: "This field should be in alphabets"
+                },
+
+                Country_State: {
+                    alpha: "This field should be in alphabets"
+                },
+                Post_Code: {
+                    digits: "Post code should be of digits"
+                },
+
+                Phone: {
+                    digits: "Mobile should be of digits"
+                },
+
+                Alt_Phone: {
+                    digits: "Mobile should be of digits"
+                },
+
+                Pay_Method: {
+                    required: "Choose a payment method"
+                }
+
+            },
+
+            submitHandler: function (form) {
+                 $.ajax({
+                           url:'/place-order',
+                            method: 'post',
+                            data: $(form).serialize(),
+                            success: (response) => {
+
+                                swal("Confirming your order!", {
+                                    buttons: false,
+                                    timer: 2000,
+                                });
+
+                                if (response.codSuccess) {
+                                   location.href='/order-success'
+                                } else {
+                                    razorpayPayment(response)
+                                }
+
+
+                            }
+                        })
+                    }
+
+            })
+
+ function razorpayPayment(order) {
+        var options = {
+            "key": "rzp_test_vovwbHwVyhwb4I", // Enter the Key ID generated from the Dashboard
+            "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": "INR",
+            "name": "Bookly",
+            "description": "Test Transaction",
+            "image": "https://example.com/your_logo",
+            "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "handler": function (response) {
+
+
+                verifyPayment(response, order)
+            },
+            "prefill": {
+                "name": "Gaurav Kumar",
+                "email": "gaurav.kumar@example.com",
+                "contact": "9999999999"
+            },
+            "notes": {
+                "address": "Razorpay Corporate Office"
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+    }
+    function verifyPayment(payment, order) {
+
+        $.ajax({
+            url: '/verify-payment',
+            method: "post",
+            data: {
+                payment,
+                order
+            },
+            method: 'post',
+            success: (response) => {
+                if (response.status) {
+                    location.href = ('/order-success')
+                } else {
+                    alert('payment failed')
+                }
+            }
+
+        })
+
+    }
+
+
+</script>
+
+
+
+{{!-- coupon script --}}
+
+
+<script>
+    function couponCheck() {
+
+
+        let code = $('#couponInput').val()
+        console.log(code)
+        $.ajax({
+            url: '/coupon-check',
+            data: {
+                coupon: code,
+            },
+            method: 'post',
+
+            success: (response) => {
+                if (response.status) {
+                    $('#couponValid').show()
+                    $('#couponValid').html('<i class="text-success fa-regular fa-circle-check"></i>  Valid Code')
+
+                    setTimeout(() => {
+                        $('#couponInput').prop('readonly', true)
+                        console.log('hi');
+                    }, 1000)
+
+                    $('#totaldiscount').html(response.discount)
+
+                    $('#totalPrice').html(response.amount)
+                } else {
+
+                    $('#couponValid').show()
+                    $('#couponValid').html('<i class="fa-solid text-danger fa-xmark"></i> Invalid Code')
+                    $("#discount").html(0)
+                    setTimeout(() => {
+                        $('#couponValid').hide()
+                    }, 3000)
+
+                }
+            }
+        })
+
+    }
+</script>
+{{!-- save address script --}}
+
+<script>
+                    function savedAddressSelect(First_Name, Last_Name, Company_Name, Street_Address, Extra_Details, Town_City, Country_State, Post_Code, Phone, Alt_Phone) {
+                        document.getElementById('First_Name').value = First_Name
+                        document.getElementById('Last_Name').value = Last_Name
+                        document.getElementById('Company_Name').value = Company_Name
+                        document.getElementById('Street_Address').value = Street_Address
+                        document.getElementById('Extra_Details').value = Extra_Details
+                        document.getElementById('Town_City').value = Town_City
+                        document.getElementById('Country_State').value = Country_State
+                        document.getElementById('Post_Code').value = Post_Code
+                        document.getElementById('Phone').value = Phone
+                        document.getElementById('Alt_Phone').value = Alt_Phone
+                    }
+</script>
+
+
+<style>
+    .error {
+        color: red !important;
+        font-size: x-small !important;
+        margin-left: 10px
+    }
+    h6 {
+        margin: 23px 0 0;
+    }
+    input {
+        padding: none;
+    }
+    dl {
+        margin: 0;
+    }
+    dd {
+        margin: 0;
+    }
+</style>
+
+
+<style>
+    dt {
+        color: black;
+    }
+    .checkout-top {
+        margin-bottom: 23px;
+    }
+    .checkout-top p,
+    .checkout-top p a {
+        color: #000000;
+        font-family: "Montserrat", sans-serif;
+        font-size: 16px;
+    }
+    .checkout-top p a {
+        color: #d22a28;
+    }
+    .checkout-box-title {
+        border-bottom: 1px solid #ecedee;
+        color: #000000;
+        font-size: 18px;
+        font-weight: normal;
+        letter-spacing: 0;
+        padding: 16px 0;
+        text-align: center;
+    }
+    .billing-address {
+        background: #fff none repeat scroll 0 0;
+        border: 1px solid #ecedee;
+    }
+    .checkout-billing-adress-box {
+        padding: 21px 35px 50px 25px;
+    }
+    .billing-address-input {
+        margin-bottom: 20px;
+    }
+    .billing-address-input label {
+        color: #000000;
+        float: left;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0;
+    }
+    .billing-address-input select,
+    .billing-address-input input[type="text"] {
+        border: 0 none;
+        border-bottom: 1px solid #e5e5e5;
+        color: #000000;
+        float: right;
+        font-size: 14px;
+        font-weight: 300;
+        height: 40px;
+        padding: 0 10px;
+        width: 55%;
+    }
+    .billing-address-input select option {}
+    .cbab-create-account {
+        margin-bottom: 19px;
+    }
+    .cbab-create-account input[type="checkbox"] {}
+    .cbab-create-account label {
+        color: #000000;
+        font-size: 14px;
+        font-weight: 300;
+        letter-spacing: 0;
+        line-height: 16px;
+        margin: 0;
+    }
+    .cbab-create-account p {
+        color: #000000;
+        line-height: 24px;
+        margin: 12px 0 0;
+    }
+    .cbab-account-password {
+        margin: 0 0 31px;
+    }
+    .cbab-account-password label {
+        color: #000000;
+        font-size: 14px;
+        font-weight: 300;
+        letter-spacing: 0;
+        line-height: 16px;
+        margin: 0;
+    }
+    .cbab-account-password input[type="password"] {
+        border: 0 none;
+        border-bottom: 1px solid #e5e5e5;
+        color: #000000;
+        float: right;
+        font-size: 14px;
+        font-weight: 300;
+        height: 40px;
+        padding: 0 10px;
+        width: 55%;
+    }
+    .cbab-order-notes {}
+    .cbab-order-notes p {
+        color: #000000;
+        font-size: 14px;
+        font-weight: 300;
+        letter-spacing: 0;
+        line-height: 16px;
+        margin: 0 0 10px;
+    }
+    .cbab-order-notes input[type="text"] {
+        border: 0 none;
+        border-bottom: 1px solid #e5e5e5;
+        color: #000000;
+        font-size: 14px;
+        font-weight: 300;
+        height: 40px;
+        padding: 0 10px;
+        width: 100%;
+    }
+    .promotional-code-box {
+        background: #fff none repeat scroll 0 0;
+        border: 1px solid #ecedee;
+        margin-bottom: 30px;
+        margin-top: 30px;
+    }
+    .pcb-content {
+        padding: 0 35px 25px;
+    }
+    .pcb-content p {
+        color: #000000;
+        margin-bottom: 25px;
+    }
+    .pcb-cuppon-input {}
+    .pcb-cuppon-input input[type="text"] {
+        border: 0 none;
+        border-bottom: 1px solid #e5e5e5;
+        color: #000000;
+        float: left;
+        font-weight: 300;
+        height: 40px;
+        letter-spacing: 0;
+        text-align: center;
+        width: 46%;
+    }
+    .pcb-cuppon-input button {
+        float: right;
+        width: 50%;
+    }
+    .checkout-page-button {
+        background: #d22a28 none repeat scroll 0 0;
+        border: 0 none;
+        border-radius: 3px;
+        color: #fff;
+        display: inline-block;
+        padding: 5px 30px;
+        text-transform: uppercase;
+    }
+    .your-order-box {
+        background: #fff none repeat scroll 0 0;
+        border: 1px solid #ecedee;
+        margin-bottom: 30px;
+    }
+    .yob-content {
+        padding: 25px 25px 70px;
+    }
+    .yobc-title,
+    .yobc-title span {
+        color: #232530;
+        font-family: "Montserrat", sans-serif;
+        margin-bottom: 33px;
+    }
+    .yobc-title span {
+        float: right;
+    }
+    .yob-content ul {
+        list-style: outside none none;
+        padding: 0;
+    }
+    .yob-content ul li {
+        border-bottom: 1px solid #e5e5e5;
+        color: #000000;
+        font-size: 14px;
+        font-weight: 400;
+        letter-spacing: 0;
+        line-height: 30px;
+        margin: 0 0 27px;
+        padding: 0 0 1px;
+    }
+    .yob-content ul li.order-total {
+        text-transform: uppercase;
+    }
+    .yob-content ul li span {
+        color: #d22a28;
+        float: right;
+    }
+    .create-account-checkout-method {}
+    .select-payment-method {
+        margin-bottom: 3px;
+    }
+    .select-payment-method input[type="checkbox"] {}
+    .select-payment-method label {
+        color: #000000;
+        font-size: 14px;
+        font-weight: 300;
+        letter-spacing: 0;
+        margin-left: 10px;
+    }
+    .create-account-text {
+        border: 1px solid #e5e5e5;
+        margin: 0 0 20px;
+        padding: 21px 20px;
+    }
+    .create-account-text p {
+        color: #000000;
+        font-weight: 300;
+        line-height: 24px;
+    }
+    .place-order {
+        margin: 15px 0 0;
+        text-align: center;
+    }
+    .place-order button {}
+</style>
+
+<script>
+    function myFunction() {
+        /* Get the text field */
+        var copyText = document.getElementById("myInput");
+
+        /* Select the text field */
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+        /* Copy the text inside the text field */
+        navigator.clipboard.writeText(copyText.value);
+
+        /* Alert the copied text */
+       
+    }
+</script>
+
+{{else}}
+<div class="container">
+
+	<div class="col-sm-12 empty-cart-cls text-center mb-5 " style="margin-top:200px ;">
+		<img src="https://cdn-icons-png.flaticon.com/512/678/678451.png" width="130" height="130"
+			class="img-fluid mb-5 mr-3">
+		<h3 class="mb-5"><strong>Your Cart is Empty</strong></h3>
+		<button type="button" class="btn btn-outline-secondary">
+			<a href="/" class="btn btn-index ">Shop now </a>
+		</button>
+
+	</div>
+
+	{{/if}}

@@ -1,0 +1,42 @@
+<section>
+  
+     <div  style=" margin-left: 83%; margin-top: 3%;">
+      <a href="/admin//add-Coupons" class="btn btn-success ml-auto">generate Coupons</a>
+        </div>
+<table class="table mt-4">
+  <thead>
+    <tr>
+      <th scope="col">no</th>
+      <th scope="col">Coupon</th>
+      <th scope="col">offer </th>
+        <th scope="col">Validity</th>
+       <th scope="col">action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      {{#each coupons}}
+      <th scope="row">{{inc @index}}</th>
+      <td>{{this.Name}}</td>
+       <td>{{this.Offer}}%</td>
+        <td>{{this.Validity}}</td>
+      
+
+      
+             <td> <a
+              class="btn btn-danger" 
+              
+              href="/admin/delete-coupon/?id={{this._id}}" 
+              onclick="return confirm ('are you want to delete this product ?')">DELETE
+            </a>
+            </td>
+    </tr>
+    {{/each}}
+   
+    </tr>
+  </tbody>
+</table>
+       
+    </div>
+</section>
+

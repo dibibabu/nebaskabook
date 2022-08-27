@@ -1,0 +1,68 @@
+<div style="margin-top: 50px;">
+    <table class="table" id="table_id">
+
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+     
+      <th scope="col">DATE</th>
+       <th scope="col">user name</th>
+      <th scope="col">MOBILE</th>
+      <th scope="col">AMOUNT</th>
+      <th scope="col">PAYMENT</th>
+      <th scope="col">STATUS</th>
+       <th scope="col">PRODUCTS</th>
+      <th scope="col">ACTION</th>
+     
+      
+
+    </tr>
+  </thead>
+  <tbody>
+    {{#each orders}}
+    <tr>
+      <th scope="row">{{inc @index}}</th>
+     <td>{{this.date}}</td>
+     <td>{{this.deliveryDetails.name}}</td>
+      <td>{{this.deliveryDetails.mobile}}</td>
+      <td>{{this.totalAmount}}</td>
+      <td>{{this.paymentMethod}}</td>
+     <td>
+     {{#if fixed}}
+    <p>{{this.status}}</p>
+     {{else}}
+<select name="forma" onchange="location = this.value;">
+ <option value="">{{this.status}}</option>
+ <option value="/admin/change-status1/{{this._id}}">shipped</option>
+ <option value="/admin/change-status2/{{this._id}}">delivered</option>
+</select>
+{{/if}}
+</td>
+<td><a href="/admin/view-ordered?id={{this._id}}" class="btn btn-success">Details</a></td>
+
+{{#if fixed}}
+ 
+{{else}}
+       <td> <a
+              class="btn btn-danger" 
+              href="/admin/cancel-order/{{this._id}}" 
+              onclick="return confirm ('are you want to cancel your order?')">cancel
+            </a></td>
+            {{/if}}
+
+            
+           
+            
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+</div>
+
+
+
+<script>
+   $(document).ready( function () {
+    $('#table_id').DataTable();
+} );
+</script>

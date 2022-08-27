@@ -1,0 +1,111 @@
+<div >
+
+	<div class="bg0 m-t-23 p-b-140">
+		<div class="container">
+			<div class="flex-w flex-sb-m p-b-52">
+				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
+
+				</div>
+			</div>
+
+			<div class="row isotope-grid">
+				{{#each products}}
+
+
+				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+					<!-- Block2 -->
+					<div class="block2">
+						<div class="block2-pic hov-img0">
+							<img src="/product-image/{{this.product.images.[0]}}" alt="IMG-PRODUCT"
+								style="height:20rem ;">
+
+							<a href="/quick-view?id={{this.product._id}}"
+								class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 ">
+								details
+							</a>
+						</div>
+						<div class="size-204 flex-w flex-m respon6-next">
+										
+
+										{{!-- <a href="/add-to-cart/{{products._id}}" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">Add to cart</a>  --}}
+										
+										<button onclick="addToCart('{{this.product._id}}')" class="btn btn-success">
+                                Add to cart
+                            </button>
+'
+										
+									</div>
+
+
+						<div class="block2-txt flex-w flex-t p-t-14">
+							<div class="block2-txt-child1 flex-col-l ">
+								<a href="#" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									{{this.product.name}}
+								</a>
+								<a href="#" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									{{this.product.category}}
+								</a>
+
+								<span class="stext-105 cl3">
+									${{this.product.price}}
+								</span>
+							</div>
+
+							<div class="block2-txt-child2 flex-r p-t-3">
+								<a href="/delete-wish?id={{this._id}}&proId={{this.product._id}}"
+									class="btn-addwish-b2 dis-block pos-relative "
+									onclick="return confirm('Are you sure to delete?')">
+									<img class="icon-heart1 dis-block trans-04"
+										src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyIk0XA4RrvbSA9t8zw6Q_ea5qFGyrSsA9Bg&usqp=CAU"
+										alt="ICON" style="width:40px ;">
+
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				{{/each}}
+			</div>
+
+			<!-- Load more -->
+
+		</div>
+	</div>
+</div>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+
+
+    function addToCart(proId) {
+
+        alert(proId)
+
+        $.ajax({
+            url: '/add-to-cart/' + proId,
+            method: 'get',
+            success: (response) => {
+
+                if (response.status) {
+
+                    let count = $('#cartCount').html()
+                    Swal.fire(
+                        
+                        'product added succesfully!',
+                       
+                    )
+
+                    count = parseInt(count) + 1
+                    $('#cart-count').load(location.href + " #cart-count")
+
+                }
+
+
+
+
+            }
+
+        })
+
+
+    }</script>

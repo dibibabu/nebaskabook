@@ -1,0 +1,133 @@
+	<div class="breadcrumb-section breadcrumb-bg" style="margin-top: 100px;">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8 offset-lg-2 text-center">
+						<div class="breadcrumb-text">
+							<p>Fresh ad Organic</p>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+        <div class="container">
+<div>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="card  col-3 border-secondary" style="width: 18rem;">
+  <div class="card-body ">
+    <h5 class="card-title">Add Address</h5>
+    <a href="/address-form" class="text-center"><i class="fa-solid fa-plus fs-1"></i></a>
+  
+  </div>
+</div>
+{{#each response}}
+<div class="card col-3 mx-4 border border-3 border-success" style="width: 18rem;">
+  <div class="card-body  ">
+    <h5 class="card-title">Address</h5>
+    <h6 class="card-subtitle mb-2  fw-bold">{{this.addresses.name}} </h6>
+    <p class="card-text">{{this.addresses.address}},{{this.addresses.pincode}}</p>
+    <p class="card-text fw-bold">Phone No : {{this.addresses.phone}}</p>
+    {{!-- <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a> --}}
+  </div>
+</div>
+{{/each}}
+
+        </div>
+    </div>
+
+
+          
+        </div>
+              
+            <script>
+    var errorName = document.getElementById('names')
+    var errorEmail = document.getElementById('emails')
+    var errorAddress = document.getElementById('addresses')
+    var errorNumber = document.getElementById('numbers')
+    var errorpincode= document.getElementById('pincodes')
+    function validateName() {
+		console.log("hhhhhhhhhhhhh")
+        const name = document.getElementById('name').value;
+        if (name == "") {
+            errorName.innerHTML = 'Enter your Name'
+            return false
+        }  
+        if (!name.match(/^[a-zA-Z]*$/)) {
+            errorName.innerHTML = 'invalid'
+            return false
+        }
+        errorName.innerHTML = ''
+        return true
+
+    }
+    function validEmail() {
+        const name = document.getElementById('email').value
+        if (name == "") {
+            errorEmail.innerHTML = "enter you email address"
+            return false
+
+
+        }
+        if (!name.match(/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/)) {
+            errorEmail.innerHTML = 'enter a proper email adress'
+            return false
+        }
+
+        errorEmail.innerHTML = ''
+        return true
+    } 
+	function validateAddress(){
+		const address=document.getElementById('address').value
+		if(address==''){
+			errorAddress.innerHTML='cannot be empty'
+			return false
+
+		}
+		errorAddress.innerHTML=null
+		return true
+	}
+    function validateNumber(){
+      const name = document.getElementById('phone').value
+      if (name==""){
+        errorNumber.innerHTML="enter your number"
+       return false 
+      }
+      if(name.length<10){
+        errorNumber.innerHTML="invalid number"
+        return false
+      }
+      errorNumber.innerHTML=null
+      return true
+    }
+	function validatePincode(){
+		const pincode=document.getElementById('pincode').value
+		if(pincode==''){
+			errorpincode.innerHTML='cannot be empty'
+			return false
+		}else if(pincode.length<6){
+			errorpincode.innerHTML='it should be 6 digit'
+			return false
+
+		}
+		errorpincode.innerHTML=null
+		return true
+	}
+
+
+ 
+    function validation() {
+        if (validateName() && validEmail() && validateAddress() && validateNumber() && validatePincode()) {
+            
+         return true
+        }
+        return false
+    }
+	</script>
+
+         
+        
+          
+         
+             
