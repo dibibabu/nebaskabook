@@ -302,7 +302,7 @@ router.get('/place-order',verifyLogin,async(req,res,next)=>{
 
  userHelpers.getCoupon().then((coupon)=>{
  
-   res.render('user/checkOut',{coupon,user,wishCount,saveAddress,total,cartCount,layout:'user-layout'})
+   res.render('user/checkout',{coupon,user,wishCount,saveAddress,total,cartCount,layout:'user-layout'})
   })
  } catch (error) {
   next(error)
