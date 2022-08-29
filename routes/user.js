@@ -724,7 +724,7 @@ router.get('/AddAddress',verifyLogin,async(req,res,next)=>{
    let user=req.session.user
   
  
-   res.render('user/AddAddress',{layout:'user-layout',user})
+   res.render('user/addAddress',{layout:'user-layout',user})
  
  
  } catch (error) {

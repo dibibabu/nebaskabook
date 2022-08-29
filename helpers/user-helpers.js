@@ -10,7 +10,7 @@ var instance = new Razorpay({
     key_id:process.env.KEY_ID,
     key_secret:process.env.KEY_SECRET,
   });
- const { v4 : uuidv4 } = require('uuid')
+const { v4 : uuidv4 } = require('uuid')
 const { log } = require('console')
 module.exports={
     doSignup:(userData)=>{
