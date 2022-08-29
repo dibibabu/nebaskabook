@@ -413,29 +413,15 @@
 				</h4>
 
 				<ul>
+						{{#each categories}}
 					<li class="p-b-10">
-						<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-							Abc
+						<a href="/selected-category?id={{this.category}}" class="stext-107 cl7 hov-cl1 trans-04">
+						{{this.category}}
 						</a>
 					</li>
+						{{/each}}
 
-					<li class="p-b-10">
-						<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-							QWE
-						</a>
-					</li>
-
-					<li class="p-b-10">
-						<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-							Shoes
-						</a>
-					</li>
-
-					<li class="p-b-10">
-						<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-							Watches
-						</a>
-					</li>
+					
 				</ul>
 			</div>
 

@@ -1,4 +1,5 @@
 var db=require('../config/connection')
+require('dotenv').config()
 var collection=require('../config/collection') 
 const bcrypt=require('bcrypt')
 const { response, use } = require('../app')
@@ -6,8 +7,8 @@ const { ObjectId } = require('mongodb')
 const objectId = require('mongodb').ObjectId
 const Razorpay=require('razorpay');
 var instance = new Razorpay({
-    key_id: 'rzp_test_vovwbHwVyhwb4I',
-    key_secret: 'DCbxKiZCPrBbjMWhHdFTjUki',
+    key_id:process.env.KEY_ID,
+    key_secret:process.env.KEY_SECRET,
   });
  const { v4 : uuidv4 } = require('uuid')
 const { log } = require('console')
