@@ -1,4 +1,5 @@
 var express = require("express");
+require('dotenv').config()
 const { Admin } = require("mongodb");
 const { route, response } = require("../app");
 const { Category_collection } = require("../config/collection");
@@ -9,8 +10,8 @@ var productHelper = require("../helpers/product-helpers");
 const userHelpers=require('../helpers/user-helpers')
 const multer=require('../middlewares/multter')
 const adminData = {
-  username: "admin",
-  password: "12345",
+  username: process.env.ADMIN_NAME,
+  password: process.env.ADMIN_PASSWORD,
 };
 
 //get home
