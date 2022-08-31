@@ -1,5 +1,8 @@
 var express = require("express");
-require('dotenv').config()
+const path = require('path')
+require('dotenv').config({
+    path: path.resolve(__dirname, '../.env')
+  })
 const { Admin } = require("mongodb");
 const { route, response } = require("../app");
 const { Category_collection } = require("../config/collection");

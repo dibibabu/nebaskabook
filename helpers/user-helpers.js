@@ -1,5 +1,8 @@
 var db=require('../config/connection')
-require('dotenv').config()
+const path = require('path')
+require('dotenv').config({
+    path: path.resolve(__dirname, '../.env')
+  })
 var collection=require('../config/collection') 
 const bcrypt=require('bcrypt')
 const { response, use } = require('../app')
